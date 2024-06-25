@@ -27,10 +27,10 @@ class HomeView extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Navigator.push
-          // Get.to(() => const SecondScreen());
+          Get.to(() => const SecondScreen());
 
           // Navigator.pushReplacement
-          // Get.off(() => const SecondScreen());
+          Get.off(() => const SecondScreen());
 
           // Navigator.pushAndRemoveUntil
           Get.offAll(() => const SecondScreen());
