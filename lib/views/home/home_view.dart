@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_learning/views/second/second_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -26,16 +25,25 @@ class HomeView extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Navigator.push
-          Get.to(() => const SecondScreen());
+          // Snackbar:
+          Get.snackbar('Checking', "This is get Snackbar");
 
-          // Navigator.pushReplacement
-          Get.off(() => const SecondScreen());
+          // Dialogue
+          Get.defaultDialog(title: 'Alert', middleText: "Are you sure?");
 
-          // Navigator.pushAndRemoveUntil
-          Get.offAll(() => const SecondScreen());
+          // Bottom Sheet:
+          Get.bottomSheet(BottomSheet(
+            onClosing: () {},
+            builder: (context) => const Column(
+              children: [
+                Text('Text 1'),
+                Text('Text 2'),
+                Text('Text 3'),
+              ],
+            ),
+          ));
         },
-        child: const Icon(Icons.next_plan),
+        child: const Icon(Icons.add),
       ),
     );
   }
