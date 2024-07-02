@@ -1,46 +1,36 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:get/utils.dart';
+import 'package:get/get.dart';
+import 'package:getx_learning/views/home/home_view_model.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final HomeViewModel homeViewModel = Get.put(HomeViewModel());
     debugPrint('Build');
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Counter APP'),
+        title: const Text('Switch Example'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (Platform.isAndroid) ...{
-              const Text(
-                '0',
-                style: TextStyle(fontSize: 30),
+            Obx(
+              () => Switch(
+                value: homeViewModel.isSwitched.value,
+                onChanged: (value) {
+                  homeViewModel.toggleSwitch();
+                },
               ),
-            } else ...{
-              const Text(
-                '1',
-                style: TextStyle(fontSize: 30),
-              ),
-            }
+            ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          String? value = GetUtils.camelCase('value box');
-          String? value1 = GetUtils.capitalize('value');
-          String? value2 = GetUtils.capitalizeFirst('value');
-          bool value3 = GetUtils.isEmail('huzaifa@gma');
-
-          print("$value + $value1 + $value2 + $value3");
-        },
+        onPressed: () {},
         child: const Icon(Icons.add),
       ),
     );
