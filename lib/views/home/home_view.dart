@@ -12,7 +12,7 @@ class HomeView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Switch Example'),
+        title: const Text('Switch Slider Example'),
       ),
       body: Center(
         child: Column(
@@ -26,12 +26,19 @@ class HomeView extends StatelessWidget {
                 },
               ),
             ),
+            Obx(
+              () => Slider(
+                value: homeViewModel.sliderVal.value,
+                onChanged: (val) {
+                  homeViewModel.sliderVal.value = val;
+                },
+              ),
+            ),
+            Obx(
+              () => Text(homeViewModel.sliderVal.value.toString()),
+            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add),
       ),
     );
   }
