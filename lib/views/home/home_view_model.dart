@@ -1,12 +1,15 @@
 import 'package:get/get.dart';
 
 class HomeViewModel extends GetxController {
-  final RxString _errorMsg = ''.obs;
-  RxString get errorMsg => _errorMsg;
+  final RxBool _isSwitched = false.obs;
+  RxBool get isSwitched => _isSwitched;
 
-  RxString errorMessage() {
-    _errorMsg.value = "Invalid email format";
+  RxDouble _sliderVal = 0.0.obs;
+  RxDouble get sliderVal => _sliderVal;
 
-    return _errorMsg;
+  void toggleSwitch() => _isSwitched.toggle();
+
+  void toggleSlider(RxDouble value) {
+    _sliderVal = value;
   }
 }
