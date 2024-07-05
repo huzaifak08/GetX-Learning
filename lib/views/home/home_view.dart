@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_learning/views/home/home_view_model.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final HomeViewModel homeViewModel = Get.put(HomeViewModel());
     debugPrint('Build');
 
     return Scaffold(
@@ -18,24 +16,52 @@ class HomeView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Obx(
-              () => Switch(
-                value: homeViewModel.isSwitched.value,
-                onChanged: (value) {
-                  homeViewModel.toggleSwitch();
-                },
+            TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
+              validator: (value) {
+                if (GetUtils.isUsername(value!)) {
+                  return null;
+                } else {
+                  return "Enter Valid Username";
+                }
+              },
             ),
-            Obx(
-              () => Slider(
-                value: homeViewModel.sliderVal.value,
-                onChanged: (val) {
-                  homeViewModel.sliderVal.value = val;
-                },
+            const SizedBox(height: 12),
+            TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
+              validator: (value) {
+                if (GetUtils.isEmail(value!)) {
+                  return null;
+                } else {
+                  return "Enter Valid Email";
+                }
+              },
             ),
-            Obx(
-              () => Text(homeViewModel.sliderVal.value.toString()),
+            const SizedBox(height: 12),
+            TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              validator: (value) {
+                if (GetUtils.isPhoneNumber(value!)) {
+                  return null;
+                } else {
+                  return "Enter Valid Phone Number";
+                }
+              },
             ),
           ],
         ),
