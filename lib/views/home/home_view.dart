@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_learning/repositories/product_repo.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -8,63 +9,26 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     debugPrint('Build');
 
+    final ProductRepo productRepo = Get.put(ProductRepo());
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Switch Slider Example'),
+        title: const Text('API Calls'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextFormField(
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              validator: (value) {
-                if (GetUtils.isUsername(value!)) {
-                  return null;
-                } else {
-                  return "Enter Valid Username";
-                }
-              },
+      body: Obx(
+        () => ListView.builder(
+          itemCount: productRepo.products.length,
+          itemBuilder: (context, index) => ListTile(
+            title: Text(
+              productRepo.products[index]['title'],
             ),
-            const SizedBox(height: 12),
-            TextFormField(
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              validator: (value) {
-                if (GetUtils.isEmail(value!)) {
-                  return null;
-                } else {
-                  return "Enter Valid Email";
-                }
-              },
-            ),
-            const SizedBox(height: 12),
-            TextFormField(
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              validator: (value) {
-                if (GetUtils.isPhoneNumber(value!)) {
-                  return null;
-                } else {
-                  return "Enter Valid Phone Number";
-                }
-              },
-            ),
-          ],
+          ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          debugPrint(productRepo.products.toString());
+        },
       ),
     );
   }
